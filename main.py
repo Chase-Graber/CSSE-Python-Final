@@ -1,9 +1,10 @@
-import random, os, time
+import random
+from tkinter import *
 
 # Dictionary of all verbs and their conjugations
 """
 Verbs are presented in the following form:
-list_item | [0]
+     verb | [0]
 ---------------------
       ich | [1]
        du | [2]
@@ -11,8 +12,10 @@ er/sie/es | [3]
       wir | [4]
       ihr | [5]
   Sie/sie | [6]
-
 """
+
+pronouns = ['ich', 'du', 'er/sie/es', 'wir', 'ihr', 'Sie/sie']
+
 verbs = {
     'sein' : ['to be', 'bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
     'hei\u00dfen' : ['to be called', 'heisse', 'heisst', 'heisst', 'heissen', 'heisst', 'heissen'],
@@ -47,54 +50,44 @@ verbs = {
     'essen' : ['to eat', 'esse', 'isst', 'isst', 'essen', 'esst', 'essen']
     }
 
+root = Tk()
+root.title('Conjugate or Die')
+
 def main_menu_state():
-    os.system('cls')
-    print('█▄▀ █▀█ █▄░█ ░░█ █░█ █▀▀ ▄▀█ ▀█▀\n█░█ █▄█ █░▀█ █▄█ █▄█ █▄█ █▀█ ░█░\n\n█▀█ █▀▄ █▀▀ █▀█\n█▄█ █▄▀ ██▄ █▀▄\n\n█▀ ▀█▀ █▀▀ █▀█ █▄▄ █▀▀ █▄░█\n▄█ ░█░ ██▄ █▀▄ █▄█ ██▄ █░▀█')
-    print('\n')
-    time.sleep(0.05)
-    print('1) How to play')
-    time.sleep(0.05)
-    print('2) List of all verbs')
-    time.sleep(0.05)
-    print('3) Play game')
-    time.sleep(0.05)
-    print('4) Exit game\n')
-    time.sleep(0.05)
-    ans = int(input('>> '))
-    while ans not in [1, 2, 3, 4]:
-        os.system('cls')
-        print('█▄▀ █▀█ █▄░█ ░░█ █░█ █▀▀ ▄▀█ ▀█▀\n█░█ █▄█ █░▀█ █▄█ █▄█ █▄█ █▀█ ░█░\n\n█▀█ █▀▄ █▀▀ █▀█\n█▄█ █▄▀ ██▄ █▀▄\n\n█▀ ▀█▀ █▀▀ █▀█ █▄▄ █▀▀ █▄░█\n▄█ ░█░ ██▄ █▀▄ █▄█ ██▄ █░▀█')
-        print('\n')
-        time.sleep(0.05)
-        print('1) How to play')
-        time.sleep(0.05)
-        print('2) List of all verbs')
-        time.sleep(0.05)
-        print('3) Play game')
-        time.sleep(0.05)
-        print('4) Exit game\n')
-        time.sleep(0.05)
-        ans = int(input('>> '))
+    title = Label(root, text='Konjugat oder sterben', font=('Sans-Serif', 20)).grid()
+
+    buttons = LabelFrame(root, text='Menu').grid()
+    start = Button(buttons, text='Play Game', width=20, command=play_state).grid()
+    how2play = Button(buttons, text='How to Play', width=20).grid()
+    settings = Button(buttons, text='Game Settings', width=20).grid()
     
-    if ans == 1:
-        pass
-    elif ans == 2:
-        pass
-    elif ans == 3:
-        play_state()
-    else:
-        os.system('cls')
-        print('coward')
+    root.mainloop()
 
 def play_state():
-    os.system('cls')
+    game = Toplevel(root)
+    game.title('Conjugate or Die')
+
     randverb = verb, vals = random.choice(list(verbs.items()))
-    print('Your verb is...')
-    time.sleep(1.5)
-    print(randverb[0] + '   ', end='|')
-    print('   ' + randverb[1][0])
 
+    v = Label(game, text=randverb[0], width=10).grid(row=0, column=0)
+    i = Label(game, text=pronouns[0], width=10).grid(row=1, column=0)
+    d = Label(game, text=pronouns[1], width=10).grid(row=2, column=0)
+    ese = Label(game, text=pronouns[2], width=10).grid(row=3, column=0)
+    w = Label(game, text=pronouns[3], width=10).grid(row=4, column=0)
+    ih = Label(game, text=pronouns[4], width=10).grid(row=5, column=0)
+    ss = Label(game, text=pronouns[5], width=10).grid(row=6, column=0)
 
+    meaning = Label(game, text=randverb[1][0], width=10).grid(row=0, column=1)
+    ich = Entry(game, width=10).grid(row=1, column=1)
+    du = Entry(game, width=10).grid(row=2, column=1)
+    ersiees = Entry(game, width=10).grid(row=3, column=1)
+    wir = Entry(game, width=10).grid(row=4, column=1)
+    ihr = Entry(game, width=10).grid(row=5, column=1)
+    siesie = Entry(game, width=10).grid(row=6, column=1)
+
+    submit = Button(game, text='Submit').grid(row=3, column=2)
+
+    game.mainloop()
 
 if __name__ == '__main__':
     main_menu_state()
