@@ -1,6 +1,9 @@
 import random
 from tkinter import *
 
+# Game settings (default)
+allow_irregulars = True
+
 # Dictionary of all verbs and their conjugations
 """
 Verbs are presented in the following form:
@@ -17,37 +20,37 @@ er/sie/es | [3]
 pronouns = ['ich', 'du', 'er/sie/es', 'wir', 'ihr', 'Sie/sie']
 
 verbs = {
-    'sein' : ['to be', 'bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
-    'hei\u00dfen' : ['to be called', 'heisse', 'heisst', 'heisst', 'heissen', 'heisst', 'heissen'],
-    'kommen' : ['to come', 'komme', 'kommst', 'kommt', 'kommen', 'kommt', 'kommen'],
-    'spielen' : ['to play', 'spiele', 'spielst', 'spielt', 'spielen', 'spielt', 'spielen'],
-    'machen' : ['to do', 'mache', 'machst', 'macht', 'machen', 'macht', 'machen'],
-    'sammeln' : ['to collect', 'sammle', 'sammlst', 'sammlt', 'sammlen', 'sammlt', 'sammlen'],
-    'zeichnen' : ['to draw', 'zeichne', 'zeichnest', 'zeichnet', 'zeichnen', 'zeichnet', 'zeichnen'],
-    'h\u00f6ren' : ['to listen', 'hoere', 'hoerst', 'hoert', 'hoeren', 'hoert', 'hoeren'],
-    'basteln' : ['to craft', 'bastele', 'bastelst', 'bastelt', 'basteln', 'bastelt', 'basteln'],
-    'besuchen' : ['to visit', 'besuche', 'besuchest', 'besuchet', 'besuchen', 'besuchet', 'besuchen'],
-    'schauen' : ['to view', 'schaue', 'schauest', 'schauet', 'schauen', 'schauet', 'schauen'],
-    'schwimmen' : ['to swim', 'schwimme', 'scwimmst', 'scwimmt', 'schwimmen', 'scwimmt', 'schwimmen'],
-    'tanzen' : ['to dance', 'tanze', 'tanzst', 'tanzt', 'tanzen', 'tanzt', 'tanzen'],
-    'wandern' : ['to hike', 'wande', 'wanderst', 'wandert', 'wandern', 'wandert', 'wandern'],
-    'lesen' : ['to read', 'lese', 'liest', 'liest', 'lesen', 'lest', 'lesen'],
-    'laufen' : ['to run', 'laufe', 'laeufst', 'laeuft', 'laufen', 'lauft', 'laufen'],
-    'malen' : ['to paint', 'male', 'malst', 'malt', 'malen', 'malt', 'malen'],
-    'kochen' : ['to cook', 'koche', 'kochest', 'kochet', 'kochen', 'kochet', 'kochen'],
-    'schreiben' : ['to write', 'schreibe', 'schreibest', 'schreibet', 'schreiben', 'schreibet', 'schreiben'],
-    'joggen' : ['to jog', 'jogge', 'joggst', 'joggt', 'joggen', 'joggt', 'joggen'],
-    'segeln' : ['to sail', 'segele', 'segelst', 'segelt', 'segeln', 'segelt', 'segeln'],
-    'fahren' : ['to drive', 'fahre', 'faehrst', 'faehrt', 'fahren', 'fahrt', 'fahren'],
-    'reiten' : ['to ride', 'reite', 'reitest', 'reitet', 'reiten', 'reitet', 'reiten'],
-    'fragen' : ['to ask', 'frage', 'fragst', 'fragt', 'fragen', 'fragt', 'fragen'],
-    'sehen' : ['to see', 'sehe', 'sehest', 'sehe', 'sehen', 'sehet', 'sehen'],
-    'gewinnen' : ['to win', 'gewinne', 'gewinnest', 'gewinnet', 'gewinnen', 'gewinnet', 'gewinnen'],
-    'm\u00f6geln' : ['to cheat', 'mag', 'magst', 'mag', 'moegen', 'moegt', 'moegen'],
-    'verlieren' : ['to lose', 'verliere', 'verlierest', 'verliere', 'verlieren', 'verlieret', 'verlieren'],
-    'haben' : ['to have', 'habe', 'hast', 'hat', 'haben', 'habt', 'haben'],
-    'wissen' : ['to know a fact', 'weiss', 'weisst', 'weiss', 'wissen', 'wisst', 'wissen'],
-    'essen' : ['to eat', 'esse', 'isst', 'isst', 'essen', 'esst', 'essen']
+    'sein' : ['to be', 'bin', 'bist', 'ist', 'sind', 'seid', 'sind', True],
+    'hei\u00dfen' : ['to be called', 'heisse', 'heisst', 'heisst', 'heissen', 'heisst', 'heissen', False],
+    'kommen' : ['to come', 'komme', 'kommst', 'kommt', 'kommen', 'kommt', 'kommen', False],
+    'spielen' : ['to play', 'spiele', 'spielst', 'spielt', 'spielen', 'spielt', 'spielen', False],
+    'machen' : ['to do', 'mache', 'machst', 'macht', 'machen', 'macht', 'machen', False],
+    'sammeln' : ['to collect', 'sammle', 'sammlst', 'sammlt', 'sammlen', 'sammlt', 'sammlen', False],
+    'zeichnen' : ['to draw', 'zeichne', 'zeichnest', 'zeichnet', 'zeichnen', 'zeichnet', 'zeichnen', False],
+    'h\u00f6ren' : ['to listen', 'hoere', 'hoerst', 'hoert', 'hoeren', 'hoert', 'hoeren', False],
+    'basteln' : ['to craft', 'bastele', 'bastelst', 'bastelt', 'basteln', 'bastelt', 'basteln', False],
+    'besuchen' : ['to visit', 'besuche', 'besuchest', 'besuchet', 'besuchen', 'besuchet', 'besuchen', False],
+    'schauen' : ['to view', 'schaue', 'schauest', 'schauet', 'schauen', 'schauet', 'schauen', False],
+    'schwimmen' : ['to swim', 'schwimme', 'scwimmst', 'scwimmt', 'schwimmen', 'scwimmt', 'schwimmen', False],
+    'tanzen' : ['to dance', 'tanze', 'tanzst', 'tanzt', 'tanzen', 'tanzt', 'tanzen', False],
+    'wandern' : ['to hike', 'wande', 'wanderst', 'wandert', 'wandern', 'wandert', 'wandern', False],
+    'lesen' : ['to read', 'lese', 'liest', 'liest', 'lesen', 'lest', 'lesen', True],
+    'laufen' : ['to run', 'laufe', 'laeufst', 'laeuft', 'laufen', 'lauft', 'laufen', True],
+    'malen' : ['to paint', 'male', 'malst', 'malt', 'malen', 'malt', 'malen', False],
+    'kochen' : ['to cook', 'koche', 'kochest', 'kochet', 'kochen', 'kochet', 'kochen', False],
+    'schreiben' : ['to write', 'schreibe', 'schreibest', 'schreibet', 'schreiben', 'schreibet', 'schreiben', False],
+    'joggen' : ['to jog', 'jogge', 'joggst', 'joggt', 'joggen', 'joggt', 'joggen', False],
+    'segeln' : ['to sail', 'segele', 'segelst', 'segelt', 'segeln', 'segelt', 'segeln', False],
+    'fahren' : ['to drive', 'fahre', 'faehrst', 'faehrt', 'fahren', 'fahrt', 'fahren', True],
+    'reiten' : ['to ride', 'reite', 'reitest', 'reitet', 'reiten', 'reitet', 'reiten', False],
+    'fragen' : ['to ask', 'frage', 'fragst', 'fragt', 'fragen', 'fragt', 'fragen', False],
+    'sehen' : ['to see', 'sehe', 'sehest', 'sehe', 'sehen', 'sehet', 'sehen', True],
+    'gewinnen' : ['to win', 'gewinne', 'gewinnest', 'gewinnet', 'gewinnen', 'gewinnet', 'gewinnen', False],
+    'm\u00f6geln' : ['to cheat', 'mag', 'magst', 'mag', 'moeglen', 'moegt', 'moeglen', True],
+    'verlieren' : ['to lose', 'verliere', 'verlierest', 'verliere', 'verlieren', 'verlieret', 'verlieren', False],
+    'haben' : ['to have', 'habe', 'hast', 'hat', 'haben', 'habt', 'haben', True],
+    'wissen' : ['to know a fact', 'weiss', 'weisst', 'weiss', 'wissen', 'wisst', 'wissen', True],
+    'essen' : ['to eat', 'esse', 'isst', 'isst', 'essen', 'esst', 'essen', True]
     }
 
 root = Tk()
@@ -89,17 +92,17 @@ def settings_state():
 # Line 67 to line 131: All game functions
 def lose_state():
     lose = Toplevel(root)
-    lose.title('Die')
+    lose.title('Died')
 
-    death = Label(lose, text='You have died. \u2694', font=('Sans-Serif', 20)).grid()
-    move_on = Label(lose, text='Close this window to return to the main menu.').grid()
+    death = Label(lose, text=' You have died. \u2694 ', font=('Sans-Serif', 20)).grid()
+    move_on = Label(lose, text=' Close this window to return to the main menu. ').grid()
 
 def win_state():
     win = Toplevel(root)
-    win.title('Conjugate')
+    win.title('Conjugated')
 
-    yay = Label(win, text='You have conjugated! \u263a', font=('Sans-Serif', 20)).grid()
-    move_on = Label(win, text='Close this window to return to the main menu.').grid()
+    yay = Label(win, text=' You have conjugated! \u263a ', font=('Sans-Serif', 20)).grid()
+    move_on = Label(win, text=' Close this window to return to the main menu. ').grid()
 
 def check_answers(answers, conjugations):
     for i in range(6):
@@ -122,6 +125,10 @@ def play_state():
     game = Toplevel(root)
 
     randverb = verb, vals = random.choice(list(verbs.items()))
+    if not allow_irregulars:
+        while randverb[1][6] == True:
+            randverb = verb, vals = random.choice(list(verbs.items()))
+
     game.title(randverb[0])
 
     v = Label(game, text=randverb[0], width=10).grid(row=0, column=0)
