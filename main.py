@@ -1,9 +1,6 @@
 import random
 from tkinter import *
 
-# Game settings (default)
-allow_irregulars = True
-
 # Dictionary of all verbs and their conjugations
 """
 Verbs are presented in the following form:
@@ -62,10 +59,8 @@ def main_menu_state():
     
     spacer1 = Label(root, text='').grid()
 
-    buttons = LabelFrame(root, text='Menu').grid()
-    start = Button(buttons, text='Play Game', width=20, command=play_state).grid()
-    how2play = Button(buttons, text='How to Play', width=20, command=how_play_state).grid()
-    settings = Button(buttons, text='Game Settings', width=20, command=settings_state).grid()
+    start = Button(root, text='Play Game', width=20, command=play_state).grid()
+    how2play = Button(root, text='How to Play', width=20, command=how_play_state).grid()
 
     spacer2 = Label(root, text='').grid()
     
@@ -81,13 +76,6 @@ def how_play_state():
     rules = Label(how_play, text='You must correctly conjugate the verbs given to you.\nFor conjugations containing the letter \u00e4, type it as "ae".\nFor the letter \u00f6, type as "oe".\nFor the letter \u00fc, type as "ue".\nAnd for the letter \u00df, type it as "ss".\n\nYou can change most aspects of the game in the settings.\n').grid()
 
     move_on = Label(how_play, text='Close this window to return to the main menu.').grid()
-
-# Settings screen
-def settings_state():
-    settings = Toplevel(root)
-    settings.title('Game Settings')
-
-    title = Label(settings, text='Game Settings', font=('Sans-Serif', 20)).grid()
 
 # Line 67 to line 131: All game functions
 def lose_state():
@@ -125,9 +113,6 @@ def play_state():
     game = Toplevel(root)
 
     randverb = verb, vals = random.choice(list(verbs.items()))
-    if not allow_irregulars:
-        while randverb[1][6] == True:
-            randverb = verb, vals = random.choice(list(verbs.items()))
 
     game.title(randverb[0])
 
