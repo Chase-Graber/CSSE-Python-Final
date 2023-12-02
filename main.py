@@ -110,7 +110,7 @@ def how_play_state():
 
     how = Label(how_play, text='How to Play\n', font=('Sans-Serif', 20)).grid()
 
-    rules = Label(how_play, text='You must correctly conjugate the verbs given to you.\nFor conjugations containing the letter \u00e4, type it as "ae".\nFor the letter \u00f6, type as "oe".\nFor the letter \u00fc, type as "ue".\nAnd for the letter \u00df, type it as "ss".\n\nYou can change most aspects of the game in the settings.\n').grid()
+    rules = Label(how_play, text='You must correctly conjugate the verbs given to you.\nFor conjugations containing the letter \u00e4, type it as "ae".\nFor the letter \u00f6, type as "oe".\nFor the letter \u00fc, type as "ue".\nAnd for the letter \u00df, type it as "ss".\n').grid()
 
     move_on = Label(how_play, text='Close this window to return to the main menu.').grid()
 
